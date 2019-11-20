@@ -1,31 +1,44 @@
 ID: forecast
 _schema-version: '2.1'
-description: https://github.com/mbenetti/forecast
+description: 'https://github.com/mbenetti/forecast'
 version: 0.0.1
-
 modules:
- - name: db
-   type: hdb
-   path: db
-   requires:
-    - name: hdi_db_2
-
- 
-
+  - name: db
+    type: hdb
+    path: db
+    requires:
+      - name: hdi_db_2
+  - name: js
+    type: nodejs
+    path: js
+    provides:
+      - name: js_api
+        properties:
+          url: '${default-url}'
+    requires:
+      - name: hdi_db_2
+  - name: html
+    type: html5
+    path: html
+    requires:
+      - name: js_api
+        group: destinations
+        properties:
+          name: forecast_api
+          url: '~{url}'
+          timeout: 3000000
 resources:
- - name: hdi_db
-   parameters:
+  - name: hdi_db
+    parameters:
       config:
-         schema: ml
-   properties:
-      hdi-container-name: ${service-name}
-   type: com.sap.xs.hdi-container
-
- - name: hdi_db_2
-   parameters:
+        schema: ml
+    properties:
+      hdi-container-name: '${service-name}'
+    type: com.sap.xs.hdi-container
+  - name: hdi_db_2
+    parameters:
       config:
-         schema: ml
-   properties:
-      hdi-container-name_2: ${service-name}
-   type: com.sap.xs.hdi-container
-
+        schema: ml
+    properties:
+      hdi-container-name_2: '${service-name}'
+    type: com.sap.xs.hdi-container
