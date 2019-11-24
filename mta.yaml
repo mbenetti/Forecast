@@ -1,4 +1,4 @@
-ID: forecast
+ID: forecast-1
 _schema-version: '2.1'
 description: 'https://github.com/mbenetti/forecast'
 version: 0.0.1
@@ -28,13 +28,6 @@ modules:
           url: '~{url}'
           timeout: 3000000
 resources:
-  - name: hdi_db
-    parameters:
-      config:
-        schema: ml
-    properties:
-      hdi-container-name: '${service-name}'
-    type: com.sap.xs.hdi-container
   - name: hdi_db_2
     parameters:
       config:
